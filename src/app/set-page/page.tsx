@@ -1,18 +1,17 @@
 import Navbar from "@/components/navbar"
-import Link from 'next/link'
+import { Button } from "@/components/ui/button";
 
-export default function Home() {
+export default function SetPage() {
   return (
     <>
       <Navbar />
       <div className="container flex flex-col items-center">
         <div className="w-1/2 py-8">
-          <p className="text-2xl">My Topics</p>
+          <p className="text-2xl">All Vocabulary</p>
         </div>
         <div className="flex flex-col w-1/2 my-auto gap-4">
-          <p className="text-xl">Spanish</p>
-          <p className="text-xl">German</p>
-          <p>+</p>
+          <Button>Study</Button>
+          <Button>Edit Set</Button>
         </div>
       </div>
     </>

@@ -8,11 +8,11 @@ import {
 export default function Navbar() {
   return (
     <>
-      <div className="w-full h-[64px] flex justify-between">
-        <p className="my-auto">Flashcard</p>
+      <div className="w-full h-[64px] flex justify-between px-8">
+        <p className="my-auto text-2xl">Flashcard</p>
         <SignedIn>
           {/* Mount the UserButton component */}
-          <UserButton showName={true}/>
+          <div className="my-auto"> <UserButton showName={true}/></div>
         </SignedIn>
         <SignedOut>
           {/* Signed out users get sign in button */}
