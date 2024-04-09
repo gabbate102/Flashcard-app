@@ -4,13 +4,18 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="">
       <Navbar />
-      <p>For Testing:</p>
-      <Button><Link href="/home">Go to home page</Link></Button>
-      <Button><Link href="/topic-page">Go to topic page</Link></Button>
-      <Button><Link href="/set-page">Go to set page</Link></Button>
-      <Button><Link href="/study-page">Go to study page</Link></Button>
+      <div className="container flex flex-col items-center">
+        <div className="w-1/2 py-8">
+          <p className="text-2xl">My Topics</p>
+        </div>
+        <div className="flex flex-col w-1/2 my-auto gap-4">
+          <p className="text-xl"><Link href="/topic-page">Spanish</Link></p>
+          <p className="text-xl">German</p>
+          <p>+</p>
+        </div>
+      </div>
     </main>
   );
 }
