@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar"
 import { Button } from "@/components/ui/button";
+import Link from 'next/link'
 
 export default function SetPage() {
   return (
@@ -10,7 +11,7 @@ export default function SetPage() {
           <p className="text-2xl">All Vocabulary</p>
         </div>
         <div className="flex flex-col w-1/2 my-auto gap-4">
-          <Button>Study</Button>
+          <Link href="/study-page"><Button className="w-full">Study</Button></Link>
           <Button>Edit Set</Button>
         </div>
       </div>
