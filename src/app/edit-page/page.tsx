@@ -9,7 +9,7 @@ export default function SetPage() {
       <Navbar />
       <div className="container flex flex-col items-center">
         <div className="w-1/2 py-8">
-          <p className="text-2xl">All Vocabulary</p>
+          <p className="text-2xl">Spanish</p>
         </div>
         <div className="flex flex-col w-1/2 my-auto gap-4">
           <div className="grid grid-cols-9 gap-2">

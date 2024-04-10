@@ -75,6 +75,14 @@ export default function SetPage() {
     nextCard();
   }
 
+  // onWrong decrements the card's timesCorrect value
+  const onWrong = () => {
+    if (!setComplete && card_set[currentIndex].timesCorrect > 0) {
+      card_set[currentIndex].timesCorrect = card_set[currentIndex].timesCorrect - 1;
+    }
+    nextCard();
+  }
+
   return (
     <div className="h-screen">
       <Navbar />
@@ -87,7 +95,7 @@ export default function SetPage() {
         {!showFront &&
         <div className="pt-4 flex gap-2">       
           <Button variant="ghost" onClick={onCorrect}>Correct</Button>
-          <Button variant="ghost" onClick={nextCard}>Wrong</Button>
+          <Button variant="ghost" onClick={onWrong}>Wrong</Button>
         </div>
         }
       </div>
