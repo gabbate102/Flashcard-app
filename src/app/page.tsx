@@ -1,8 +1,13 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import Navbar from "@/components/navbar"
 import Link from 'next/link'
 
 export default function Home() {
+  // topics list as demo data
+  const topics = ["Spanish","German"]
+  // render the topics into a list
+  const listItems = topics.map(topic => <p className="text-xl"><Link href={`/topic-page?topic=${topic}`}>{topic}</Link></p>);
   return (
     <main className="">
       <Navbar />
@@ -11,8 +16,7 @@ export default function Home() {
           <p className="text-2xl">My Topics</p>
         </div>
         <div className="flex flex-col w-1/2 my-auto gap-4">
-          <p className="text-xl"><Link href="/topic-page">Spanish</Link></p>
-          <p className="text-xl">German</p>
+          {listItems}
           <p>+</p>
         </div>
       </div>
