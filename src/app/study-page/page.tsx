@@ -88,7 +88,7 @@ export default function SetPage() {
       <Navbar />
       <div className="container flex flex-col items-center justify-center py-20 h-max">
         <p className="pb-4">{currentIndex + 1} / {card_set.length}</p>
-        <Card className="w-[700px] h-[400px] flex items-center justify-center" onClick={onFlip}>
+        <Card className="w-[700px] h-[400px] flex items-center justify-center cursor-pointer" onClick={onFlip}>
           {showFront && <p className="text-4xl">{card_set[currentIndex].front}</p>}
           {!showFront && <p className="text-4xl">{card_set[currentIndex].back}</p>}
         </Card>

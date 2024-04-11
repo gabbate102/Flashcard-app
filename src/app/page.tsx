@@ -13,7 +13,7 @@ export default function Home() {
       <Navbar />
       <div className="container flex flex-col items-center">
         <div className="w-1/2 py-8">
-          <p className="text-2xl">My Topics</p>
+          <p className="text-3xl">My Topics</p>
         </div>
         <div className="flex flex-col w-1/2 my-auto gap-4">
           {listItems}
