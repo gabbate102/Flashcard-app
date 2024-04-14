@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Button } from "@/components/ui/button";
 
-export default function Navbar({topic, set, correct, incorrect}: {topic:string, set:string, correct:number, incorrect:number}) {
+export default function StudyResults({topic, set, correct, incorrect}: {topic:string, set:string, correct:number, incorrect:number}) {
   return (
     <div>
       <div>

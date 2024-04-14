@@ -2,8 +2,9 @@ import Navbar from "@/components/navbar"
 import { Button } from "@/components/ui/button";
 import Link from 'next/link'
 
-export default function SetPage({searchParams}: { searchParams: { set: string } }) {
+export default function SetPage({searchParams}: { searchParams: { set: string, topic: string } }) {
   const currentSet = searchParams.set;
+  const topic = searchParams.topic
   return (
     <>
       <Navbar />
@@ -12,7 +13,7 @@ export default function SetPage({searchParams}: { searchParams: { set: string } 
           <p className="text-3xl">{currentSet}</p>
         </div>
         <div className="flex flex-col w-1/2 my-auto gap-4">
-          <Link href="/study-page"><Button className="w-full">Study</Button></Link>
+          <Link href="/study-page?set=${currentSet}&topic=${topic}"><Button className="w-full">Study</Button></Link>
         </div>
       </div>
     </>

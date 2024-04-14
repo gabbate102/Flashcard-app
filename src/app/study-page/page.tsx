@@ -4,9 +4,10 @@ import Navbar from "@/components/navbar"
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import StudyResults from "@/components/study_results"
 import next from "next";
 
-export default function SetPage() {
+export default function SetPage({searchParams}: { searchParams: { set: string, topic: string } }) {
   // create sample data 
   const card_set = [
     {
@@ -41,12 +42,19 @@ export default function SetPage() {
     }
   ];
 
+  const set = searchParams.set;
+  const topic = searchParams.topic;
+
   // showFront controls if the card is flipped
   const [showFront, setShowFront] = useState(true);
   // currentIndex controls which card is shown
   const [currentIndex, setCurrentIndex] = useState(0);
   // complete controls if the user is directed to the studyComplete page
   const [complete, setComplete] = useState(false);
+  // correct stores the cards that were correct 
+  const [correct, setCorrect] = useState([]);
+  // incorrect stores the cards that were incorrect 
+  const [incorrect, setIncorrect] = useState([]);
 
   // onFlip flips the card by alternating showFront
   const onFlip = () => {
@@ -99,6 +107,7 @@ export default function SetPage() {
         </div>
         }
       </div>
+      {complete && <StudyResults topic={topic} set={set} correct={correct.length} incorrect={incorrect.length}/>}
     </div>
   )
 }
