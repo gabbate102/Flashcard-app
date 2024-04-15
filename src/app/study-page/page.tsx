@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import StudyResults from "@/components/study_results"
-import next from "next";
 
 export default function SetPage({searchParams}: { searchParams: { set: string, topic: string } }) {
   // create sample data 
