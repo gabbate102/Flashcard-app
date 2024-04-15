@@ -52,8 +52,12 @@ export default function SetPage({searchParams}: { searchParams: { set: string, t
   const [complete, setComplete] = useState(false);
   // correct stores the cards that were correct 
   const [correct, setCorrect] = useState([]);
+  // numCorrect stores the number of cards that were correct 
+  const [numCorrect, setNumCorrect] = useState(0);
   // incorrect stores the cards that were incorrect 
   const [incorrect, setIncorrect] = useState([]);
+  // numIncorrect stores the number of cards that were correct 
+  const [numIncorrect, setNumIncorrect] = useState(0);
 
   // onFlip flips the card by alternating showFront
   const onFlip = () => {
@@ -76,16 +80,22 @@ export default function SetPage({searchParams}: { searchParams: { set: string, t
 
   // onCorrect increments the card's timesCorrect value
   const onCorrect = () => {
-    if (!setComplete && card_set[currentIndex].timesCorrect < 3) {
+    console.log("onCorrect called");
+    if (card_set[currentIndex].timesCorrect < 3) {
       card_set[currentIndex].timesCorrect = card_set[currentIndex].timesCorrect + 1;
+      setNumCorrect(numCorrect+1);
+      console.log(numCorrect);
     }
     nextCard();
   }
 
   // onWrong decrements the card's timesCorrect value
   const onWrong = () => {
-    if (!setComplete && card_set[currentIndex].timesCorrect > 0) {
+    console.log("onWrong called");
+    if (card_set[currentIndex].timesCorrect > 0) {
       card_set[currentIndex].timesCorrect = card_set[currentIndex].timesCorrect - 1;
+      setNumIncorrect(numIncorrect+1);
+      console.log(numIncorrect);
     }
     nextCard();
   }
@@ -106,7 +116,7 @@ export default function SetPage({searchParams}: { searchParams: { set: string, t
         </div>
         }
       </div>
-      {complete && <StudyResults topic={topic} set={set} correct={correct.length} incorrect={incorrect.length}/>}
+      {complete && <StudyResults topic={topic} set={set} correct={numCorrect} incorrect={numIncorrect}/>}
     </div>
   )
 }
