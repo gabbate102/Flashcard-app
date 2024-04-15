@@ -81,9 +81,9 @@ export default function SetPage({searchParams}: { searchParams: { set: string, t
   // onCorrect increments the card's timesCorrect value
   const onCorrect = () => {
     console.log("onCorrect called");
+    setNumCorrect(numCorrect+1);
     if (card_set[currentIndex].timesCorrect < 3) {
       card_set[currentIndex].timesCorrect = card_set[currentIndex].timesCorrect + 1;
-      setNumCorrect(numCorrect+1);
       console.log(numCorrect);
     }
     nextCard();
@@ -92,9 +92,9 @@ export default function SetPage({searchParams}: { searchParams: { set: string, t
   // onWrong decrements the card's timesCorrect value
   const onWrong = () => {
     console.log("onWrong called");
+    setNumIncorrect(numIncorrect+1);
     if (card_set[currentIndex].timesCorrect > 0) {
       card_set[currentIndex].timesCorrect = card_set[currentIndex].timesCorrect - 1;
-      setNumIncorrect(numIncorrect+1);
       console.log(numIncorrect);
     }
     nextCard();

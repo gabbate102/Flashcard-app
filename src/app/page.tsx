@@ -29,7 +29,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col w-1/2 my-auto gap-4">
           {listItems}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 text-xl">
             {showAdd && <Input className="w-1/2" placeholder="Enter topic name" onChange={(e) => addNewTopic(e.target.value)}/>}
             {showAdd && <p onClick={showAddTopic} className="cursor-pointer">x</p>}
             {!showAdd && <p onClick={showAddTopic} className="cursor-pointer">+</p>}
