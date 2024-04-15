@@ -9,7 +9,7 @@ import Link from 'next/link'
 export default function Navbar() {
   return (
     <>
-      <div className="w-full h-[64px] flex justify-between px-8">
+      <div className="w-full h-[64px] flex justify-between py-8 px-12">
         <p className="my-auto text-2xl"><Link href="/">Flashcard</Link></p>
         <SignedIn>
           {/* Mount the UserButton component */}
