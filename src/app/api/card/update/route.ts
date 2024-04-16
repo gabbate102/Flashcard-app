@@ -4,13 +4,11 @@ export async function POST(req: Request) {
 
     const data = await req.json()
 
-    console.log(data)
-
-    if (!data.cards || !data.setId) {
+    if (!data.cards || !data.id) {
         return Response.json({ status: 400, message: "Invalid request" });
     }
 
-    await updateCards(data.setId, data.cards);
+    await updateCards(data.id, data.cards);
 
     return Response.json({ status: 200, data })
 }

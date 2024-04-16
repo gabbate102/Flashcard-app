@@ -21,6 +21,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     const [cards, setCards] = useState<Card[]>([]);
     const [study, setStudy] = useState(false);
     const [update, setUpdate] = useState(false);
+    const [finished, setFinished] = useState(false);
 
     useEffect(() => {
         fetch(`/api/set/get?creator=${creator}&setTitle=${setTitle}`, {
@@ -34,10 +35,6 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setCards(cards)
             })
         // check if all the cards have times correct equal to 3
-        if (cards.every(card => card.timesCorrect === 3)) {
-            confetti();
-        }
-
 
     }, [update])
 
@@ -72,9 +69,14 @@ export default function Page({ params }: { params: { slug: string } }) {
             })
         })
 
+        if (cards.every(card => card.timesCorrect === 3)) {
+            confetti()
+        }
         setStudy(false)
+        setFinished(true)
 
     }
+
 
     return (
         <main className="">
@@ -88,11 +90,34 @@ export default function Page({ params }: { params: { slug: string } }) {
                     {study ?
                         <Button disabled={cards.length <= 0} onClick={() => handleFinishStudying()}>Finish Studying</Button>
                         :
-                        <Button disabled={cards.length <= 0} onClick={() => setStudy(!study)}>Study Set</Button>
+                        <Button disabled={cards.length <= 0} onClick={() => {
+                            setFinished(false);
+                            setStudy(!study)
+                        }}>Study Set</Button>
                     }
                 </div>
                 {study &&
                     <StudyCards setCards={setCards} cards={cards} />
+                }
+
+                {finished &&
+                    <div className="mt-5">
+                        <p>Well done! You've finished studying this set!</p>
+                        <div className="flex flex-col gap-2 items-center justify-center">
+                            <h1 className="py-2 text-2xl">Summary:</h1>
+                            {cards.map((card, idx) => (
+                                <div className="flex gap-2 items-center text-md">
+                                    <p>{card.frontSide} - </p>
+                                    {card.timesCorrect === 3 && <p>Perfect</p>}
+                                    {card.timesCorrect === 2 && <p>Good</p>}
+                                    {card.timesCorrect === 1 && <p>Needs Improvement</p>}
+                                    {card.timesCorrect === 0 && <p>Needs Improvement</p>}
+
+                                </div>
+                            ))}
+
+                        </div>
+                    </div>
                 }
             </div>
         </main>

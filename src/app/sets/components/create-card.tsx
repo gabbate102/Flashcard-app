@@ -55,7 +55,7 @@ export function CreateCard({ set, cardsData, setUpdate, update }: { set: Set, ca
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                setId: set.id,
+                id: set.id,
                 cards: cards
             })
         })
