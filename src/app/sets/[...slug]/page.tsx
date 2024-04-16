@@ -7,6 +7,7 @@ import { CreateCard } from "../components/create-card";
 import { Card, Set } from "@prisma/client";
 import { Card as _Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import StudyCards from "../components/study-cards";
 
 
 
@@ -17,6 +18,8 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     const [set, setSet] = useState<Set>();
     const [cards, setCards] = useState<Card[]>([]);
+
+    const [study, setStudy] = useState(false);
 
     useEffect(() => {
         fetch(`/api/set/get?creator=${creator}&setTitle=${setTitle}`, {
@@ -41,30 +44,15 @@ export default function Page({ params }: { params: { slug: string } }) {
             <Navbar />
             <div className="container flex flex-col items-center">
                 <div className="w-1/2 py-8">
-                    <p className="text-3xl">Viewing {creator}'s <span className="font-bold">{setTitle}</span> set</p>
+                    <p className="text-3xl">{creator}'s <span className="font-bold">{setTitle}</span> set with {cards.length} flashcard(s)</p>
                 </div>
                 <div className="flex flex-col w-1/2 my-auto gap-4">
                     <CreateCard set={set} cardsData={cards} />
-                    {cards.length > 0 ?
-                        <div>
-                            <h1>Filter: All</h1>
-                        </div>
-                        :
-                        <p>This set is empty!</p>
-                    }
+                    <Button disabled={cards.length <= 0} onClick={() => setStudy(!study)}>Study Set</Button>
                 </div>
-                {/* <div className="container flex flex-col items-center justify-center py-20 h-max">
-                    <p className="pb-4">1/2</p>
-                    <_Card className="w-[700px] h-[400px] flex items-center justify-center cursor-pointer">
-                        <p className="text-4xl">x</p>
-                        <p className="text-4xl">y</p>
-                    </_Card>
-                    <div className="pt-4 flex gap-2">
-                        <Button variant="ghost">Correct</Button>
-                        <Button variant="ghost">Wrong</Button>
-                    </div>
-                </div>
-            </div> */}
+                {study &&
+                    <StudyCards setCards={setCards} cards={cards} />
+                }
             </div>
         </main>
     )

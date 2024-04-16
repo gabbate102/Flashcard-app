@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, Set } from "@prisma/client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
@@ -19,6 +20,8 @@ export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) 
     const defaultCards = cardsData ?? [{ frontSide: '', backSide: '' }];
 
     const [cards, setCards] = useState<Card[]>(defaultCards);
+
+    const router = useRouter();
 
     function handleInputChangeFrontSide(e: React.ChangeEvent<HTMLInputElement>, idx: number) {
         const newCards = cards.map((card, index) => {
@@ -55,6 +58,8 @@ export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) 
                 setId: set.id,
                 cards: cards
             })
+        }).then(() => {
+            router.refresh();
         })
     }
 
