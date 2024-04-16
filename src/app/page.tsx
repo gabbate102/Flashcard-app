@@ -1,24 +1,32 @@
 "use client";
 
+import { SignedIn , SignedOut, SignInButton } from "@clerk/nextjs";
 import Navbar from "@/components/navbar"
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator"
+import { useUser } from "@clerk/nextjs";
 import Link from 'next/link'
 
 export default function Home() {
-  // topics list as demo data
-  const topics = ["Spanish","German"]
-  // render the topics into a list
-  const listItems = topics.map(topic => <p className="text-xl"><Link href={`/topic-page?topic=${topic}`}>{topic}</Link></p>);
+
+  const user = useUser();
+
   return (
-    <main className="">
+    <main className="flex items-center justify-center flex-col">
       <Navbar />
-      <div className="container flex flex-col items-center">
-        <div className="w-1/2 py-8">
-          <p className="text-3xl">My Topics</p>
-        </div>
-        <div className="flex flex-col w-1/2 my-auto gap-4">
-          {listItems}
-          <p>+</p>
-        </div>
+
+      <div className=" flex flex-col items-center justify-center py-20 gap-4">
+        <p className="text-6xl font-bold">Flashy</p>
+        <p className="text-4xl">Studying has never been easier</p>
+        <SignedIn>
+          <Link href="/sets">
+            <Button>View your Sets</Button>
+          </Link>
+        </SignedIn>
+        <SignedOut>
+          <Button><SignInButton /></Button>
+        </SignedOut>
+        <Separator className="my-4" />
       </div>
     </main>
   );
