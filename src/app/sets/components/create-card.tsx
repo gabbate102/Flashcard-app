@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
-export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) {
+export function CreateCard({ set, cardsData, setUpdate, update }: { set: Set, cardsData: Card[], setUpdate: (update: boolean) => void, update: boolean }) {
 
     const defaultCards = cardsData ?? [{ frontSide: '', backSide: '' }];
 
@@ -48,8 +48,8 @@ export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) 
         setCards(newCards);
     }
 
-    function handleSaveChanges() {
-        fetch('/api/card/update', {
+    async function handleSaveChanges() {
+        await fetch('/api/card/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -58,9 +58,8 @@ export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) 
                 setId: set.id,
                 cards: cards
             })
-        }).then(() => {
-            router.refresh();
         })
+        setUpdate(!update);
     }
 
     return (

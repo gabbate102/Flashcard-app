@@ -4,9 +4,9 @@ export async function POST(req: Request) {
 
     const data = await req.json()
 
-    console.log(data.cards)
+    console.log(data)
 
-    if (!data.cards) {
+    if (!data.cards || !data.setId) {
         return Response.json({ status: 400, message: "Invalid request" });
     }
 

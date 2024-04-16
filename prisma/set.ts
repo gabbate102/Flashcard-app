@@ -30,14 +30,14 @@ export async function getSet(authorId: string, setTitle: string) {
 }
 
 export async function updateCards(setId: string, cards: Card[]) {
+
+    console.log(setId)
     return db.set.update({
         where: {
             id: setId
         },
         data: {
-            Cards: {
-                set: cards
-            }
+            Cards: cards
         }
     });
 }

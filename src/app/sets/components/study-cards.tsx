@@ -9,7 +9,8 @@ const CardComponent = ({ card, cardIdx }: { card: Card, cardIdx: number }) => {
     const [flipped, setFlipped] = useState(false);
 
     return (
-        <_Card onClick={() => setFlipped(!flipped)} className="w-[700px] h-[400px] flex items-center justify-center cursor-pointer">
+        <_Card onClick={() => setFlipped(!flipped)} className={`w-[700px] h-[400px] flex items-center justify-center cursor-pointer  
+        ${card.timesCorrect === 3 && 'border-b-green-500 border-2'}`}>
             {!flipped ? <p className="text-4xl">{card.frontSide}</p> : <p className="text-4xl">{card.backSide}</p>}
         </_Card>
     )
