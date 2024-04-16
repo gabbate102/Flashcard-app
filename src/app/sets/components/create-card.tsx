@@ -10,24 +10,20 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Set } from "@prisma/client";
+import { Card, Set } from "@prisma/client";
 import { useState } from "react";
 
-type Card = {
-    id: string;
-    frontSide: string;
-    backSide: string;
-}
+
 export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) {
 
-    const defaultCards = cardsData || [{ id: '', frontSide: '', backSide: '' }];
+    const defaultCards = cardsData ?? [{ frontSide: '', backSide: '' }];
 
     const [cards, setCards] = useState<Card[]>(defaultCards);
 
     function handleInputChangeFrontSide(e: React.ChangeEvent<HTMLInputElement>, idx: number) {
         const newCards = cards.map((card, index) => {
             if (idx === index) {
-                return { ...card, frontSide: e.target.value, id: `${idx}` }
+                return { ...card, frontSide: e.target.value, timesCorrect: 0 }
             }
             return card;
         });
@@ -37,7 +33,7 @@ export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) 
     function handleInputChangeBackSide(e: React.ChangeEvent<HTMLInputElement>, idx: number) {
         const newCards = cards.map((card, index) => {
             if (idx === index) {
-                return { ...card, backSide: e.target.value, id: `${idx}` }
+                return { ...card, backSide: e.target.value, timesCorrect: 0 }
             }
             return card;
         });
@@ -65,7 +61,7 @@ export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) 
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <p className="hover:cursor-pointer font-bold">+</p>
+                <Button className="hover:cursor-pointer font-bold">Edit Set</Button>
             </DialogTrigger>
             <DialogContent className=" w-[800px]">
                 <DialogHeader>
@@ -82,18 +78,20 @@ export function CreateCard({ set, cardsData }: { set: Set, cardsData: Card[] }) 
                             placeholder="Front of Card"
                             className="border-2 border-black"
                             onChange={(e) => handleInputChangeFrontSide(e, index)}
+                            value={cards[index].frontSide}
                         />
                         <Input
                             type="text"
                             placeholder="Back of Card"
                             className="border-2 border-black"
                             onChange={(e) => handleInputChangeBackSide(e, index)}
+                            value={cards[index].backSide}
                         />
                         <Button onClick={() => handleRemoveCard(index)} className="hover:cursor-pointer">-</Button>
                     </div>
                 ))}
                 <Button onClick={
-                    () => setCards([...cards, { frontSide: '', backSide: '', id: `${cards.length}` }])
+                    () => setCards([...cards, { frontSide: '', backSide: '', timesCorrect: 0 }])
                 } className="hover:cursor-pointer"
                 >+</Button>
                 <DialogFooter>
