@@ -14,12 +14,12 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(cuid()) @map("_id")
-  name  String?
-  Topic Topic[]
+  id   String  @id @default(cuid()) @map("_id")
+  name String?
+  Sets Set[]
 }
 
-model Topic {
+model Set {
   id       String @id @default(cuid()) @map("_id")
   title    String
   authorId String
@@ -27,11 +27,8 @@ model Topic {
   Cards    Card[]
 }
 
-model Card {
-  id           String  @id @default(cuid()) @map("_id")
+type Card {
   frontSide    String
   backSide     String
-  timesCorrect Int     @default(0)
-  Topic        Topic?  @relation(fields: [topicId], references: [id])
-  topicId      String?
+  timesCorrect Int
 }

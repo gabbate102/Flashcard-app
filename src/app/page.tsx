@@ -1,24 +1,30 @@
 "use client";
 
 import Navbar from "@/components/navbar"
+import { Button } from "@/components/ui/button";
+import { useUser } from "@clerk/nextjs";
 import Link from 'next/link'
 
 export default function Home() {
-  // topics list as demo data
-  const topics = ["Spanish","German"]
-  // render the topics into a list
-  const listItems = topics.map(topic => <p className="text-xl"><Link href={`/topic-page?topic=${topic}`}>{topic}</Link></p>);
+
+  const user = useUser();
+
   return (
-    <main className="">
+    <main className="flex items-center justify-center flex-col">
       <Navbar />
-      <div className="container flex flex-col items-center">
-        <div className="w-1/2 py-8">
-          <p className="text-3xl">My Topics</p>
-        </div>
-        <div className="flex flex-col w-1/2 my-auto gap-4">
-          {listItems}
-          <p>+</p>
-        </div>
+
+      <div className=" flex flex-col items-center justify-center py-20 ">
+        <p className="text-6xl font-bold">Flashy</p>
+        <p className="text-4xl">Studying for your next test has never been easier</p>
+        {user ? (
+          <Link href="/sets">
+            View your Sets
+          </Link>
+        ) : (
+          <Link href="/sign-in">
+            Sign in
+          </Link>
+        )}
       </div>
     </main>
   );
