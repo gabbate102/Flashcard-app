@@ -75,7 +75,7 @@ export function CreateCard({ set, cardsData, setUpdate, update }: { set: Set, ca
                     </DialogDescription>
                 </DialogHeader>
                 <Label className="text-md"><span className="font-bold">{cards.length}</span> cards in this set</Label>
-                {cards.map((_, index) => (
+                {cards?.map((_, index) => (
                     <div className="flex gap-2 py-1 items-center">
                         <Input
                             type="text"

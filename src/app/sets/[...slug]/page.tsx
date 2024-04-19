@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             .then(response => response.json())
             .then(data => {
                 const set = data.set as Set;
-                const cards = data.set.Cards;
+                const cards = data.set?.Cards;
                 setSet(set)
                 setCards(cards)
             })
@@ -44,6 +44,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 const set = data.set as Set;
                 const cards = data.set?.Cards;
                 setSet(set)
@@ -87,7 +88,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
                 <div className="flex flex-col w-1/2 my-auto gap-4">
                     <CreateCard set={set} cardsData={cards} setUpdate={setUpdate} update={update} />
-                    {study && cards ?
+                    {study ?
                         <Button disabled={cards.length <= 0} onClick={() => handleFinishStudying()}>Finish Studying</Button>
                         :
                         <Button disabled={cards.length <= 0} onClick={() => {
@@ -96,7 +97,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                         }}>Study Set</Button>
                     }
                 </div>
-                {study && cards &&
+                {study &&
                     <StudyCards setCards={setCards} cards={cards} />
                 }
 
