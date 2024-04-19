@@ -69,7 +69,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             })
         })
 
-        if (cards.every(card => card.timesCorrect === 3)) {
+        if (cards?.every(card => card?.timesCorrect === 3)) {
             confetti()
         }
         setStudy(false)
@@ -83,7 +83,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <Navbar />
             <div className="container flex flex-col items-center">
                 <div className="w-1/2 py-8">
-                    <p className="text-3xl">{creator}'s <span className="font-bold">{setTitle}</span> set with {cards.length} flashcard(s)</p>
+                    <p className="text-3xl">{creator}'s <span className="font-bold">{setTitle}</span> set with {cards?.length} flashcard(s)</p>
                 </div>
                 <div className="flex flex-col w-1/2 my-auto gap-4">
                     <CreateCard set={set} cardsData={cards} setUpdate={setUpdate} update={update} />
@@ -105,7 +105,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                         <p>Well done! You've finished studying this set!</p>
                         <div className="flex flex-col gap-2 items-center justify-center">
                             <h1 className="py-2 text-2xl">Summary:</h1>
-                            {cards.map((card, idx) => (
+                            {cards?.map((card, idx) => (
                                 <div className="flex gap-2 items-center text-md">
                                     <p>{card.frontSide} - </p>
                                     {card.timesCorrect === 3 && <p>Perfect</p>}
